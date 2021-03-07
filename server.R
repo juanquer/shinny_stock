@@ -76,7 +76,6 @@ shinyServer(function(input, output) {
                                fields = c("open", "high", "low", "close", "adjclose", "volume"), from = as.Date(input$dateRange1[1]),
                                to = as.Date(input$dateRange1[2]), interval = "1d")
         
-        #ranges$x <- c(as.Date(input$dateRange1[1]),as.Date(input$dateRange1[2]))
         # Lo transformamos a un DF para poder trabajar bien
         df = data.frame(date=as.Date(index(datos)), datos)
         # Renombramos las columnas dinamicamente para que se escalable
@@ -141,7 +140,31 @@ shinyServer(function(input, output) {
     })
     
     output$table1 <- renderTable({
-        df_total
+        # Nombre de la empresa
+        empresa = input$empresa1
+        # Hacemos una peticion a los datos
+        datos <- pdfetch_YAHOO(empresa,
+                               fields = c("open", "high", "low", "close", "adjclose", "volume"), from = as.Date(input$dateRange1[1]),
+                               to = as.Date(input$dateRange1[2]), interval = "1d")
+        
+        # Lo transformamos a un DF para poder trabajar bien
+        df = data.frame(date=as.Date(index(datos)), datos)
+        # Renombramos las columnas dinamicamente para que se escalable
+        df=df %>% 
+            rename(
+                high = paste(empresa,".high",sep=""),
+                low = paste(empresa,".low",sep=""),
+                close = paste(empresa,".close",sep=""),
+                open = paste(empresa,".open",sep=""),
+                adjClose = paste(empresa,".adjclose",sep=""),
+                volume = paste(empresa,".volume",sep="")
+            )
+        
+        
+        
+        df
+        
+        
     })
     
     output$imagen <- renderImage({

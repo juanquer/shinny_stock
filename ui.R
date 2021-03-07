@@ -46,7 +46,7 @@ shinyUI(fluidPage(
                    div(class="header", checked=NA,
                        p("Esta práctica tiene el objetivo de representar multiples gráficos y tablas que puedan ser útiles a la hora de decidir si invertir en 
                una determinada empresa del IBEX35. Desde el panel de la izquierda, se puede seleccionar cualquier empresa, y el rango de fechas que se
-               pretende analizar.)"),
+               pretende analizar."),
                p("La etiqueta Gráfico, representa uno de los gráficos más importantes que se emplean en este nicho. Es bastante
                 parecido a un Boxplot, aquí en lineas negras se representa la variación entre el máximo y mínimo, y con líneas rojas o verdes la diferencia 
                entre la apertura y el cierre. (Si el cierre es más elevado que la apertura, será verde, y rojo en el caso contrario). Resumen gráfico en la siguiente imagen"),
